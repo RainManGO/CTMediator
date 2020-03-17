@@ -53,7 +53,7 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     
     // 这里这么写主要是出于安全考虑，防止黑客通过远程方式调用本地模块。这里的做法足以应对绝大多数场景，如果要求更加严苛，也可以做更加复杂的安全逻辑。
     NSString *actionName = [url.path stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    if ([actionName hasPrefix:@"native"]) {
+    if ([actionName hasPrefix:@"Native"]) {
         return @(NO);
     }
     
@@ -80,9 +80,9 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     // generate target
     NSString *targetClassString = nil;
     if (swiftModuleName.length > 0) {
-        targetClassString = [NSString stringWithFormat:@"%@.Target_%@", swiftModuleName, targetName];
+        targetClassString = [NSString stringWithFormat:@"%@.RC%@Target", swiftModuleName, targetName];
     } else {
-        targetClassString = [NSString stringWithFormat:@"Target_%@", targetName];
+        targetClassString = [NSString stringWithFormat:@"RC%@Target", targetName];
     }
     NSObject *target = self.cachedTarget[targetClassString];
     if (target == nil) {
@@ -91,7 +91,7 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     }
 
     // generate action
-    NSString *actionString = [NSString stringWithFormat:@"Action_%@:", actionName];
+    NSString *actionString = [NSString stringWithFormat:@"RC%@Action:", actionName];
     SEL action = NSSelectorFromString(actionString);
     
     if (target == nil) {
@@ -125,15 +125,15 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     if (targetName == nil) {
         return;
     }
-    NSString *targetClassString = [NSString stringWithFormat:@"Target_%@", targetName];
+    NSString *targetClassString = [NSString stringWithFormat:@"RC%@Target", targetName];
     [self.cachedTarget removeObjectForKey:targetClassString];
 }
 
 #pragma mark - private methods
 - (void)NoTargetActionResponseWithTargetString:(NSString *)targetString selectorString:(NSString *)selectorString originParams:(NSDictionary *)originParams
 {
-    SEL action = NSSelectorFromString(@"Action_response:");
-    NSObject *target = [[NSClassFromString(@"Target_NoTargetAction") alloc] init];
+    SEL action = NSSelectorFromString(@"RCNotFoundAction:");
+    NSObject *target = [[NSClassFromString(@"RCTargetNoTargetAction") alloc] init];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"originParams"] = originParams;
@@ -172,7 +172,7 @@ NSString * const kCTMediatorParamsKeySwiftTargetModuleName = @"kCTMediatorParams
     }
 
     if (strcmp(retType, @encode(BOOL)) == 0) {
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
+        NSInvocation *invocation = [NSInvocation  invocationWithMethodSignature:methodSig];
         [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
