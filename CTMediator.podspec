@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "CTMediator"
-  s.version      = "28"
-  s.summary      = "CTMediator."
+  s.name         = "RCMediator"
+  s.version      = "1"
+  s.summary      = "RCMediator"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-  this is CTMediator
+  this is RCMediator
                    DESC
 
   s.homepage     = "https://github.com/casatwy/CTMediator"
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/casatwy/CTMediator.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/RainManGO/CTMediator.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
