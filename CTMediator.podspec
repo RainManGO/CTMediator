@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RCMediator"
-  s.version      = "1"
+  s.version      = "30"
   s.summary      = "RCMediator"
 
   # This description is used to generate tags and improve search results.
@@ -122,7 +122,7 @@ Pod::Spec.new do |s|
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
-  
+
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
